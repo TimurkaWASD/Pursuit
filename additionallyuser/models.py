@@ -1,11 +1,10 @@
 from django.db import models
+from django_countries.fields import CountryField
 
 class Country(models.Model):
-    name = models.CharField(max_length=50)
+    name = CountryField()
 
 class Language(models.Model):
     name = models.CharField(max_length=50)
 
-class Cityis(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+

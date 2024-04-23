@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Targets List</title>{% endblock %}
+{% block content %}
+<body>
+    <h1>All Targets</h1>
+    <ul>
+        {% for target in targets %}
+        <li>
+            <h2>"{{ target.name }}"</h2>
+            <p>Description: {{ target.description }}</p>
+            <img src="{{ target.image }}">
+            <p>Rating: {{ target.rating }}</p>
+
+            <form method="post" action="{% url 'change_rating' target.id %}">
+                {% csrf_token %}
+                <input type="number" name="rating" min="0" max="5" value="{{ target.rating }}">
+                <button type="submit">Change Rating</button>
+            </form>
+
+            <p>Status: {{ target.status }}</p>
+            <form method="post" action="{% url 'change_status' target.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="status" value="{% if target.status %}False{% else %}True{% endif %}">
+                <button type="submit">{% if target.status %}Set False{% else %}Set True{% endif %} Status</button>
+            </form>
+
+            <p>Favorite: {{ target.favorite }}</p>
+            <form method="post" action="{% url 'change_favorite' target.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="favorite" value="{% if target.favorite %}False{% else %}True{% endif %}">
+                <button type="submit">{% if target.favorite %}Set False{% else %}Set True{% endif %} Favorite</button>
+            </form>
+
+            <p>Date start: {{ target.date_start }}</p>
+            <p>Date end: {{ target.date_end }}</p>
+        </li>
+        <p>----------------------------------------------------------------</p>
+        {% endfor %}
+    </ul>
+</body>
+{% endblock %}
+
+

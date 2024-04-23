@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>User Profile</h1>
+    <div>
+        <h2>{{ user.first_name }} {{ user.second_name }}</h2>
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Phone Number: {{ user.phone_number }}</p>
+        <p>Description: {{ user.description }}</p>
+        <p>Languages: {{ user.languages }}</p>
+        <p>Country: {{ user.country }}</p>
+    </div>
+
+    <a href="{% url 'profile_editor' %}">Редактировать профиль</a>
+    <a href="{% url 'logout' %}">Выход</a>
+{% endblock %}
+
